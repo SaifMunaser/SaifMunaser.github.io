@@ -1,50 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CSC 225 Lab 4 - Store Order</title>
-</head>
-<body>
-    <h1 id="greeting"></h1>
-    <p id="name"></p>
-    <p id="item"></p>
-    <p id="quantity"></p>
-    <p id="arrival"></p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lab 4</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="index.html">Home</a>
+
+      <div>
+        <a class="text-white-50 mr-3" href="index.html">Homepage</a>
+        <span class="text-white font-weight-bold">Lab 4</span>
+      </div>
+    </nav>
+
+    <div class="container py-4">
+      <h1 id="greeting"></h1>
+      <p id="name"></p>
+      <p id="item"></p>
+      <p id="quantity"></p>
+      <p id="arrival"></p>
+    </div>
 
     <script>
-        alert("Welcome to the store!");
+      alert("Welcome to the store!");
 
-        let customerName = prompt("Enter your name:");
+      let customerName = prompt("Enter your name:");
 
-        let itemRequested = prompt("Enter the item you want to order (apples or oranges):");
-        while (itemRequested !== "apples" && itemRequested !== "oranges") {
-            itemRequested = prompt("Invalid item. Please enter only apples or oranges:");
-        }
+      let itemRequested = prompt("Enter the item you want to order (apples or oranges):");
+      while (itemRequested !== "apples" && itemRequested !== "oranges") {
+        itemRequested = prompt("Invalid item. Please enter only apples or oranges:");
+      }
 
-        let numberOfItems = prompt("Enter the number of items you want (1-99):");
-        while (numberOfItems < 1 || numberOfItems > 99 || isNaN(numberOfItems)) {
-            numberOfItems = prompt("Invalid amount. Enter a number between 1 and 99:");
-        }
+      let numberOfItems = prompt("Enter the number of items you want (1-99):");
+      while (numberOfItems < 1 || numberOfItems > 99 || isNaN(numberOfItems)) {
+        numberOfItems = prompt("Invalid amount. Enter a number between 1 and 99:");
+      }
 
-        let today = new Date();
-        let hour = today.getHours();
-        let greetingMessage = "";
+      let today = new Date();
+      let hour = today.getHours();
+      let greetingMessage = "";
 
-        if (hour < 12) {
-            greetingMessage = "Good Morning " + customerName + ", Thank you for Ordering!";
-        } else if (hour < 18) {
-            greetingMessage = "Good Afternoon " + customerName + ", Thank you for Ordering!";
-        } else {
-            greetingMessage = "Good Evening " + customerName + ", Thank you for Ordering!";
-        }
+      if (hour < 12) {
+        greetingMessage = "Good Morning " + customerName + ", Thank you for Ordering!";
+      } else if (hour < 18) {
+        greetingMessage = "Good Afternoon " + customerName + ", Thank you for Ordering!";
+      } else {
+        greetingMessage = "Good Evening " + customerName + ", Thank you for Ordering!";
+      }
 
-        let arrivalDate = new Date();
-        arrivalDate.setDate(arrivalDate.getDate() + 7);
+      let arrivalDate = new Date();
+      arrivalDate.setDate(arrivalDate.getDate() + 7);
 
-        document.getElementById("greeting").innerHTML = greetingMessage;
-        document.getElementById("name").innerHTML = "Customer Name: " + customerName;
-        document.getElementById("item").innerHTML = "Item Ordered: " + itemRequested;
-        document.getElementById("quantity").innerHTML = "Quantity Ordered: " + numberOfItems;
-        document.getElementById("arrival").innerHTML = "Expected Arrival Date: " + arrivalDate.toDateString();
+      document.getElementById("greeting").innerHTML = greetingMessage;
+      document.getElementById("name").innerHTML = "Customer Name: " + customerName;
+      document.getElementById("item").innerHTML = "Item Ordered: " + itemRequested;
+      document.getElementById("quantity").innerHTML = "Quantity Ordered: " + numberOfItems;
+      document.getElementById("arrival").innerHTML = "Expected Arrival Date: " + arrivalDate.toDateString();
     </script>
-</body>
+  </body>
 </html>
