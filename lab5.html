@@ -53,7 +53,7 @@ document.getElementById("myForm").onsubmit = function(event) {
   }
 
   if (user.password.includes("!") == false && user.password.includes("?") == false) {
-    output.innerHTML = "Registration Failed<br>Password must contain ! or ?";
+    output.innerHTML = "Registration Failed<br>Password must contain at least 1 ! or ?";
     return;
   }
 
