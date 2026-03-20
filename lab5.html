@@ -48,7 +48,7 @@ document.getElementById("myForm").onsubmit = function(event) {
   let output = document.getElementById("output");
 
   if (user.firstName == "" || user.lastName == "" || user.email == "" || user.password == "" || user.dob == "") {
-    output.innerHTML = "Registration Failed<br>All fields must be present.";
+    output.innerHTML = "Registration Failed<br>All fields must be filled out.";
     return;
   }
 
