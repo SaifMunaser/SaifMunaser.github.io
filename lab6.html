@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 6</title>
+</head>
+<body>
+
+    <h1>Cat Facts</h1>
+
+    <a href="index.html">
+        <button>Home</button>
+    </a>
+
+    <button onclick="loadCats()">Get Cat Facts</button>
+
+    <br><br>
+
+    <img id="catPic" src="https://via.placeholder.com/300x200?text=Cat+Picture" width="300">
+
+    <br><br>
+
+    <table border="1">
+        <tr>
+            <th>factId</th>
+            <th>fact</th>
+        </tr>
+        <tbody id="catTable"></tbody>
+    </table>
+
+    <script>
+        function loadCats() {
+            fetch("https://brianobruno.github.io/cats.json")
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    data.facts.sort(function(a, b) {
+                        return a.factId - b.factId;
+                    });
+
+                    var table = document.getElementById("catTable");
+                    table.innerHTML = "";
+
+                    for (var i = 0; i < data.facts.length; i++) {
+                        var row = "<tr><td>" + data.facts[i].factId + "</td><td>" + data.facts[i].text + "</td></tr>";
+                        table.innerHTML += row;
+                    }
+
+                    document.getElementById("catPic").src = data.catPhoto;
+                })
+                .catch(function(error) {
+                    alert("Something went wrong");
+                    console.log(error);
+                });
+        }
+    </script>
+
+</body>
+</html>
