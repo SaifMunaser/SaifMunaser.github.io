@@ -6,10 +6,10 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container mt-4">
   <h3>Registration Page</h3>
 
-  <form id="myForm">
+  <form onsubmit="return registerUser()">
     <label>First Name</label>
     <input type="text" id="firstName" class="form-control">
 
@@ -34,9 +34,7 @@
 </div>
 
 <script>
-document.getElementById("myForm").onsubmit = function(event) {
-  event.preventDefault();
-
+function registerUser() {
   let user = {
     firstName: document.getElementById("firstName").value,
     lastName: document.getElementById("lastName").value,
@@ -49,12 +47,12 @@ document.getElementById("myForm").onsubmit = function(event) {
 
   if (user.firstName == "" || user.lastName == "" || user.email == "" || user.password == "" || user.dob == "") {
     output.innerHTML = "Registration Failed<br>All fields must be filled out.";
-    return;
+    return false;
   }
 
   if (user.password.includes("!") == false && user.password.includes("?") == false) {
     output.innerHTML = "Registration Failed<br>Password must contain at least 1 ! or ?";
-    return;
+    return false;
   }
 
   user.password = "*".repeat(user.password.length);
@@ -66,7 +64,9 @@ document.getElementById("myForm").onsubmit = function(event) {
     "Email Address: " + user.email + "<br>" +
     "Password: " + user.password + "<br>" +
     "Date of Birth: " + user.dob;
-};
+
+  return false;
+}
 </script>
 
 </body>
