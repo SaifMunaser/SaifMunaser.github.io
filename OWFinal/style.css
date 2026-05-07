@@ -1,0 +1,15 @@
+body {
+  background-color: #1a1a2e;
+  color: white;
+}
+
+.ow-card {
+  background-color: #16213e;
+  border: 1px solid #333;
+  color: white;
+}
+
+.map-img {
+  height: 130px;
+  object-fit: cover;
+}

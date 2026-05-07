@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Map Detail</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="index.html">OW Explorer</a>
+    <a href="index.html" class="btn btn-outline-light btn-sm me-1">Heroes</a>
+    <a href="maps.html" class="btn btn-warning btn-sm">Maps</a>
+  </nav>
+
+  <div class="container mt-4">
+    <a href="maps.html" class="btn btn-outline-light btn-sm mb-3">← Back to Maps</a>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    let mapKey = new URLSearchParams(location.search).get("key");
+
+    async function loadDetail() {
+      let mapsRes = await fetch("https://overfast-api.tekrop.fr/maps");
+      let maps = await mapsRes.json();
+      let map = maps.find(function(m) { return m.key === mapKey; });
+
+      let heroesRes = await fetch("https://overfast-api.tekrop.fr/heroes");
+      let heroes = await heroesRes.json();
+
+      let role = "damage";
+      if (map.gamemodes.includes("control")) role = "tank";
+      else if (map.gamemodes.includes("escort") || map.gamemodes.includes("hybrid")) role = "support";
+
+      let pool = heroes.filter(function(h) { return h.role === role; });
+      let hero = pool[Math.floor(Math.random() * pool.length)];
+
+      let color = role === "tank" ? "primary" : role === "damage" ? "danger" : "success";
+
+      document.getElementById("result").innerHTML =
+        '<h1>' + map.name + '</h1>'
+        + '<div class="row g-4">'
+        + '<div class="col-12 col-md-6">'
+        + '<img src="' + map.screenshot + '" class="img-fluid rounded">'
+        + '</div>'
+        + '<div class="col-12 col-md-6">'
+        + '<div class="card ow-card p-3 mb-3">'
+        + '<h4>Map Info</h4>'
+        + '<p>Location: ' + map.location + '</p>'
+        + '<p>Game Modes: ' + map.gamemodes.join(", ") + '</p>'
+        + '</div>'
+        + '<div class="card ow-card p-3">'
+        + '<h4>Recommended Hero</h4>'
+        + '<img src="' + hero.portrait + '" style="width:70px" class="mb-2 d-block">'
+        + '<p>' + hero.name + '</p>'
+        + '<span class="badge bg-' + color + '">' + hero.role + '</span>'
+        + '</div>'
+        + '</div></div>';
+    }
+
+    loadDetail();
+  </script>
+
+</body>
+</html>
